@@ -31,7 +31,7 @@
 
         @else
 
-          <ion-icon name="heart"></ion-icon>
+          <ion-icon name="swap-vertical-outline"></ion-icon>
 
         @endif
 

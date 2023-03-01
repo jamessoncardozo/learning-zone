@@ -13,10 +13,31 @@ class TestingComponents extends Component
 
   public $search=null;
 
+  public $sortField='updated_at';
+
+  public $sortDirection = 'asc';
+
+
+
+  public function sortBy($field){
+
+    if($this->sortField=== $field){
+    
+      $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' :'asc' ;'asc' ? 'desc' :'asc' ;
+    
+    }else{
+
+      $this->sortDirection ='asc';
+    }
+    
+    $this->sortField=$field;
+
+  }
+
   public function render()
   {       
         return view('livewire.testing-components', [
-        'users' => User::where('name','like','%'.$this->search.'%')->paginate(10),
+        'users' => User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->paginate(10),
       ]);
   }
 

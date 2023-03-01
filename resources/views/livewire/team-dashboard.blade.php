@@ -56,10 +56,13 @@
               </x-table.row>
             @empty
               <x-table.row>
-                <x-table.cell colspan="3">
-                  <div class="text-center">Não foi localizado nenhum usuário.</div>
+                <x-table.cell colspan="4">
+                  <div class="flex justify-center items-center space-x-2">
+                    <ion-icon name="file-tray-full-outline" class="h-8 w-8 text-gray-300"></ion-icon>
+                    <span class="font-medium py-8 text-gray-500 text-xl">Não foi localizada nenhuma equipe.</span>
+                  </div>
                 </x-table.cell>
-                
+
               </x-table.row>
             @endforelse
 
