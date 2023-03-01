@@ -10,6 +10,7 @@
     <div class="flex-col space-y-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="py-4">
         <x-jet-input  type="search" wire:model="search" class="w-1/4" placeholder="Pesquise um usuário..."/>
+        
       </div>
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <x-table>
