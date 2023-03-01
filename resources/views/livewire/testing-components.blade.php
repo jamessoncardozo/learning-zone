@@ -1,60 +1,52 @@
-<x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Dashboard') }}
+          {{ __('Painel dos Usuários') }}
       </h2>
   </x-slot>
 
 
-  <div class="py-4">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="bg-white dark:bg-indigo-800 overflow-hidden shadow-xl sm:rounded-lg">
-            
-          <div class="flex items-center shrink-0">
+  <div class="py-12">
 
-            Dark Mode: <span></span>
-
-
-            <div x-data="{ label: 'Hello' }" x-effect="console.log(label)">
-              <button @click="label += ' World!'">Change Message</button>
-          </div>
-          
-            <a href="/" >
-              <img id="logo" alt="Controle de Estoque" class="block w-auto h-72 py-4">
-            </a>
-
-            <script>
-                  const mql = window.matchMedia('(prefers-color-scheme: dark)');
-
-                  // Define a callback function for the event listener.
-                  function handleDarkModeChange(mql) {
-                    if (mql.matches) {
-                      var img = document.getElementById('logo'); 
-                      img.src = "/img/pms05.png"
-                    } else {
-                      var img = document.getElementById('logo'); 
-                      img.src = "/img/pms07.png"
-
-                    }                  
-                  }
-
-                  // Run the orientation change handler once.
-                  handleDarkModeChange(mql);
-
-                  // Add the callback function as a listener to the query list.
-                  mql.addEventListener("change", handleDarkModeChange);
-
-
-              /*if (localStorage.theme === 'theme' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                var img = document.getElementById('logo'); 
-                img.src = "/img/pms05.png"
-              }else{
-                var img = document.getElementById('logo');
-                img.src = "/img/pms07.png"
-              };*/
-                  
-            </script>               
-          </div>
+    <div class="flex-col space-y-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="py-4">
+        <x-jet-input  type="search" wire:model="search" class="w-1/4" placeholder="Pesquise um usuário..."/>
       </div>
+      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <x-table>
+
+        <x-slot name="head">
+
+          <x-table.heading sortable>Nome: </x-table.heading>
+          
+          <x-table.heading sortable>E-mail: </x-table.heading>
+
+          <x-table.heading sortable>Desde: </x-table.heading>
+
+        </x-slot>
+
+        <x-slot name="body">
+        
+          @foreach ($users as $user)
+            
+            <x-table.row>
+
+              <x-table.cell>{{ $user->name}} </x-table.cell>
+
+              <x-table.cell>{{ $user->email}} </x-table.cell>
+              
+              <x-table.cell>{{ $user->created_at}} </x-table.cell>
+
+            </x-table.row>
+
+          @endforeach
+
+        </x-slot>
+
+        </x-table>
+        
+      </div>
+      <div>
+        {{ $users->links() }}
+      </div>
+    </div>
   </div>
-</x-app-layout>

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\http\Livewire\TestingComponents;
+use App\Http\Livewire\TeamDashboard;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +25,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+  
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
-    Route::get('/livewire/testing-components', function () {return view('livewire.testing-components');})->name('testing');
+
+    Route::get('/livewire/testing-components', TestingComponents::class)->name('testing');
+
+    Route::get('/livewire/team-dashboard', TeamDashboard::class)->name('teamdash');
 });
