@@ -20,6 +20,12 @@ class TestingComponents extends Component
       ]);
   }
 
+  public function updatedSearch(){
+
+    $this->notifica('Você pesquisou por: '.$this->search,'success');
+
+  }
+  
   public function notifica($message,$style)
   {
       session()->flash('flash.banner', $message);

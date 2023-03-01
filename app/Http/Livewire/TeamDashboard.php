@@ -19,4 +19,16 @@ class TeamDashboard extends Component
       'teams' => Team::where('name','like','%'.$this->search.'%')->paginate(10),
     ]);
   }
+
+  public function updatedSearch(){
+
+    $this->notifica('Você pesquisou por: '.$this->search,'success');
+
+  }
+  
+  public function notifica($message,$style)
+  {
+      session()->flash('flash.banner', $message);
+      session()->flash('flash.bannerStyle', $style);
+  }
 }

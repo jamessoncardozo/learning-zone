@@ -29,7 +29,7 @@
 
           <x-slot name="body">
           
-            @foreach ($teams as $team)
+            @forelse ($teams as $team)
               
               <x-table.row>
 
@@ -54,8 +54,14 @@
                 <x-table.cell>{{ $team->created_at->diffForHumans()}} </x-table.cell>
 
               </x-table.row>
-
-            @endforeach
+            @empty
+              <x-table.row>
+                <x-table.cell colspan="3">
+                  <div class="text-center">Não foi localizado nenhum usuário.</div>
+                </x-table.cell>
+                
+              </x-table.row>
+            @endforelse
 
           </x-slot>
 

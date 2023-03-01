@@ -27,7 +27,7 @@
 
         <x-slot name="body">
         
-          @foreach ($users as $user)
+          @forelse ($users as $user)
             
             <x-table.row>
 
@@ -39,7 +39,18 @@
 
             </x-table.row>
 
-          @endforeach
+          @empty
+
+            <x-table.row>
+
+              <x-table.cell colspan="3">
+
+                <div class="text-center">Não foi localizado nenhum usuário.</div>
+
+              </x-table.cell>            
+            </x-table.row>
+
+          @endforelse
 
         </x-slot>
 
