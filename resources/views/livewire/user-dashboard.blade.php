@@ -1,27 +1,26 @@
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Painel dos Usuários') }}
+          {{ __('Users Dashboard') }}
       </h2>
   </x-slot>
 
 
-  <div class="py-12">
+  <div class="py-4">
 
     <div class="flex-col space-y-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="py-4">
-        <x-jet-input  type="search" wire:model="search" class="w-1/4" placeholder="Pesquise um usuário..."/>
-        
+      <div class="p-2 sm:py-4">
+        <x-jet-input  type="search" wire:model="search" class="block w-full sm:w-1/3" placeholder="Pesquise um usuário..."/>
       </div>
-      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg m-2 md:my-4">
         <x-table>
 
         <x-slot name="head">
 
-          <x-table.heading sortable wire:click="sortBy('name')">Nome: </x-table.heading>
+          <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null">Nome: </x-table.heading>
           
-          <x-table.heading sortable wire:click="sortBy('email')">E-mail: </x-table.heading>
+          <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">E-mail: </x-table.heading>
 
-          <x-table.heading sortable wire:click="sortBy('created_at')">Desde: </x-table.heading>
+          <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sortField === 'created_at' ? $sortDirection : null">Desde: </x-table.heading>
 
         </x-slot>
 
@@ -35,7 +34,7 @@
 
               <x-table.cell>{{ $user->email}} </x-table.cell>
               
-              <x-table.cell>{{ $user->created_at}} </x-table.cell>
+              <x-table.cell>{{ $user->created_at->diffForHumans()}} </x-table.cell>
 
             </x-table.row>
 

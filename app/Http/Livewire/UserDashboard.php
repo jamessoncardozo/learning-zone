@@ -7,7 +7,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class TestingComponents extends Component
+class UserDashboard extends Component
 {
   use WithPagination;
 
@@ -17,27 +17,28 @@ class TestingComponents extends Component
 
   public $sortDirection = 'asc';
 
-
+  protected $queryString =['sortDirection'];
 
   public function sortBy($field){
 
-    if($this->sortField=== $field){
+    $this->sortDirection = $this->sortField === $field
     
-      $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' :'asc' ;'asc' ? 'desc' :'asc' ;
-    
-    }else{
+    ?
 
-      $this->sortDirection ='asc';
-    }
+      $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' :'asc' 
     
+    : 'asc';
+        
     $this->sortField=$field;
 
   }
 
   public function render()
   {       
-        return view('livewire.testing-components', [
+        return view('livewire.user-dashboard', [
+
         'users' => User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->paginate(10),
+        
       ]);
   }
 

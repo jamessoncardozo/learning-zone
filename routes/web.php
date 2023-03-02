@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\http\Livewire\TestingComponents;
 use App\Http\Livewire\TeamDashboard;
+use App\Http\Livewire\UserDashboard;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +30,7 @@ Route::middleware([
   
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
-    Route::get('/livewire/testing-components', TestingComponents::class)->name('testing');
+    Route::get('/livewire/user-dashboard', UserDashboard::class)->name('userdash');
 
     Route::get('/livewire/team-dashboard', TeamDashboard::class)->name('teamdash');
 });

@@ -14,7 +14,7 @@
     
   @else
     
-    <button {{ $attributes->except('class') }} class="flex items-center space-x-1 text-left text-xs leading-4 font-medium">
+    <button {{ $attributes->except('class') }} class="flex items-center space-x-1 text-left text-xs leading-4 font-medium focus:font-extrabold">
       
       <span>{{ $slot }}</span>
 
@@ -23,15 +23,21 @@
 
         @if ($direction === 'asc')
         
-          <ion-icon name="chevron-up-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-200 dark:text-gray-600 fill-blue-600" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 328l144-144 144 144"/>
+          </svg>
 
         @elseif ($direction ==='desc')
 
-          <ion-icon name="chevron-down-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-200 dark:text-gray-600 fill-blue-600" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/>
+          </svg>
 
         @else
 
-          <ion-icon name="swap-vertical-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-200 dark:text-gray-600 fill-blue-600" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M464 208L352 96 240 208M352 113.13V416M48 304l112 112 112-112M160 398V96"/>
+          </svg>
 
         @endif
 
