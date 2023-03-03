@@ -60,21 +60,46 @@ class UserDashboard extends Component
 
   public function exportXLSX() 
   {
-      return (new UsersFromQueryExport(2020))->download('users.xlsx');
+    if(!$this->query){
+      $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+
+      return (new UsersExport($this->query->modelKeys()))->download('users.xlsx');
+
+    }else{
+
+      return (new UsersExport($this->query->modelKeys()))->download('users.xlsx');
+
+    }
   }
 
   public function exportCSV() 
   { 
+    if(!$this->query){
+      $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
 
-    return (new UsersExport($this->query))->download('users.csv');
+      return (new UsersExport($this->query->modelKeys()))->download('users.csv');
 
-      //return Excel::download(new UsersExport, 'users.csv',\Maatwebsite\Excel\Excel::CSV);
+    }else{
+
+      return (new UsersExport($this->query->modelKeys()))->download('users.csv');
+
+    }
+
   }
 
   
   public function exportPDF() 
   { 
-    return Excel::download(new UsersExport, 'users.pdf',\Maatwebsite\Excel\Excel::MPDF);
+    if(!$this->query){
+      $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+
+      return (new UsersExport($this->query->modelKeys()))->download('users.pdf');
+
+    }else{
+
+      return (new UsersExport($this->query->modelKeys()))->download('users.pdf');
+
+    }
   }
 
   public function notifica($message,$style)

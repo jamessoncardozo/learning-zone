@@ -1,9 +1,8 @@
   <x-slot name="header">
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Users Dashboard') }}
-      </h2>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      {{ __('Users Dashboard') }}
+    </h2>
   </x-slot>
-
 
   <div class="py-4">
 
@@ -21,7 +20,7 @@
 
           <div @click.away="openSort = false" class="relative w-full" x-data="{ openSort: false,sortType:'10' }">
 
-            <button @click="openSort = !openSort" class="flex text-white bg-gray-200 items-center justify-start w-full  py-2 m-2 text-sm font-semibold text-left bg-transparent rounded-lg ">
+            <button @click="openSort = !openSort" class="flex text-white bg-gray-200 items-center justify-start w-full  py-2 px-3 text-sm font-semibold text-left bg-transparent rounded-lg ">
               <x-jet-input type="number" wire:model="paginate" class="bg-transparent border-none shadow-none text-black " placeholder="{{ $paginate }}"/>
             </button>
 
@@ -35,31 +34,29 @@
                   class="absolute z-50 w-full origin-top-right">
 
               <div class="px-2 pt-2 pb-2 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
-                <div class="flex flex-col">
+                <div class="flex flex-col ">
 
                   <x-jet-button
                       @click="sortType='10',openSort=!openSort"
                       x-show="sortType != '10'"
                       wire:click="$set('paginate',10)"
-                      class="right-0 block my-1 px-1 w-full bg-green-500 ring-green-800">
+                      class="right-0 block my-1 px-1 w-full bg-green-500 ring-green-800 text-xl">
                     {{ __('10') }}
                   </x-jet-button>
-
-  
-                   
+                     
                   <x-jet-button
                       @click="sortType='20',openSort=!openSort"
                       x-show="sortType != '20'"
                       wire:click="$set('paginate',20)"
-                      class="block my-1 px-1 w-full bg-indigo-500 ring-indigo-800 text-white">
-                      {{ __('20') }}
-                    </x-jet-button>
-  
+                      class="block my-1 px-1 w-full bg-indigo-500 ring-indigo-800 text-white text-xl">
+                    {{ __('20') }}
+                  </x-jet-button>
+
                   <x-jet-button
                       @click="sortType='50',openSort=!openSort"
                       x-show="sortType != '50'"
                       wire:click="$set('paginate',50)"
-                      class="right-0 block my-1 px-1 w-full bg-red-500 ring-red-800">
+                      class="right-0 block my-1 px-1 w-full bg-red-500 ring-red-800 text-xl">
                     {{ __('50') }}
                   </x-jet-button>
 
@@ -67,19 +64,23 @@
                       @click="sortType='100',openSort=!openSort"
                       x-show="sortType != '100'"
                       wire:click="$set('paginate',100)"
-                      class="right-0 block my-1 px-1 w-full bg-red-500 ring-red-800">
+                      class="right-0 block my-1 px-1 w-full bg-red-500 ring-red-800 text-xl">
                     {{ __('100') }}
                   </x-jet-button>
+
                 </div>
+
               </div>
+
             </div>
+
           </div> 
+
         </div>
 
         <script src="//unpkg.com/alpinejs" defer></script>
 
       </div>
-
 
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg m-2 md:my-4">
       <x-table>
@@ -91,6 +92,8 @@
           <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">E-mail: </x-table.heading>
 
           <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sortField === 'created_at' ? $sortDirection : null">Desde: </x-table.heading>
+
+          <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sortField === 'updated_at' ? $sortDirection : null">Atualizado em: </x-table.heading>
 
         </x-slot>
 
@@ -105,6 +108,8 @@
               <x-table.cell>{{ $user->email}} </x-table.cell>
               
               <x-table.cell>{{ $user->created_at->diffForHumans()}} </x-table.cell>
+              
+              <x-table.cell>{{ $user->updated_at->diffForHumans()}} </x-table.cell>
 
             </x-table.row>
 
