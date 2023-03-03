@@ -4,6 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 
+use App\Exports\UsersExport;
+use app\Exports\UsersFromQueryExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,6 +22,10 @@ class UserDashboard extends Component
   public $sortDirection = 'asc';
 
   protected $queryString =['sortDirection'];
+
+  public $paginate=10;
+
+  protected $query;
 
   public function sortBy($field){
 
@@ -35,9 +43,11 @@ class UserDashboard extends Component
 
   public function render()
   {       
+        $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection);
+        
         return view('livewire.user-dashboard', [
 
-        'users' => User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->paginate(10),
+        'users' => $this->query->paginate($this->paginate),
         
       ]);
   }
@@ -47,7 +57,26 @@ class UserDashboard extends Component
     $this->notifica('Você pesquisou por: '.$this->search,'success');
 
   }
+
+  public function exportXLSX() 
+  {
+      return (new UsersFromQueryExport(2020))->download('users.xlsx');
+  }
+
+  public function exportCSV() 
+  { 
+
+    return (new UsersExport($this->query))->download('users.csv');
+
+      //return Excel::download(new UsersExport, 'users.csv',\Maatwebsite\Excel\Excel::CSV);
+  }
+
   
+  public function exportPDF() 
+  { 
+    return Excel::download(new UsersExport, 'users.pdf',\Maatwebsite\Excel\Excel::MPDF);
+  }
+
   public function notifica($message,$style)
   {
       session()->flash('flash.banner', $message);

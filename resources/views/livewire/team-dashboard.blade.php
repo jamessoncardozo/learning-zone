@@ -11,6 +11,7 @@
       <div class="p-2 sm:py-4">
         <x-jet-input  type="search" wire:model="search" class="block w-full sm:w-1/3" placeholder="Pesquise um usuário..."/>
       </div>
+      
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg m-2 md:my-4">
 
         <x-table>

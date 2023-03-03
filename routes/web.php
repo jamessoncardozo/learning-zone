@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Exports\UsersExport;
 use App\http\Livewire\TestingComponents;
 use App\Http\Livewire\TeamDashboard;
 use App\Http\Livewire\UserDashboard;
@@ -31,6 +31,6 @@ Route::middleware([
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
     Route::get('/livewire/user-dashboard', UserDashboard::class)->name('userdash');
-
+    
     Route::get('/livewire/team-dashboard', TeamDashboard::class)->name('teamdash');
 });
