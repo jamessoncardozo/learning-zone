@@ -1,4 +1,6 @@
-<div class="bg-no-repeat bg-center ..." style="background-image: url(https://github.com/jamessoncardozo/Estoque-Novo/blob/79baed7b1ae7db738f2b2450adae556b358cb7b3/git%20hub%20banner.png)"></div>
+<div class="bg-no-repeat bg-center ..." style="background-image: url(https://github.com/jamessoncardozo/Estoque-Novo/blob/a27d9d044a8163af0d4c979bfb9630e769203c4f/githubbanner.png)"></div>
+
+![Logo](https://github.com/jamessoncardozo/Estoque-Novo/blob/a27d9d044a8163af0d4c979bfb9630e769203c4f/githubbanner.png)
 
 Ambiente de Teste do projeto Estoque da TI
 # Estoque Novo
