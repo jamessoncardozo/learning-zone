@@ -19,7 +19,8 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+      $this->registerComponent('dark-mode-button');
+
     }
 
     /**
@@ -45,17 +46,21 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Jetstream::defaultApiTokenPermissions(['read']);
 
-        Jetstream::role('admin', 'Administrator', [
+        Jetstream::role('admin', 'Administrador', [
             'create',
             'read',
             'update',
             'delete',
-        ])->description('Administrator users can perform any action.');
+        ])->description('Administradores podem executar qualquer ação.');
 
         Jetstream::role('editor', 'Editor', [
             'read',
             'create',
             'update',
-        ])->description('Editor users have the ability to read, create, and update.');
+        ])->description('Editores tem a habilidade de ler, criar e atualizar.');
     }
+    protected function registerComponent(string $component) {
+      
+      \Illuminate\Support\Facades\Blade::component('jetstream::components.'.$component, 'jet-'.$component);
+  }
 }

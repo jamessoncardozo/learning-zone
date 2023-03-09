@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use app\Exports\UsersExport;
+use App\http\Livewire\TestingComponents;
+use App\Http\Livewire\TeamDashboard;
+use App\Http\Livewire\UserDashboard;
+use App\Mail\OrderShipped;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +29,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+  
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
-    Route::get('/livewire/testing-components', function () {return view('livewire.testing-components');})->name('testing');
+
+    Route::get('/admin', function () {return view('admin');})->name('admin');
+
+    Route::get('/livewire/user-dashboard', UserDashboard::class)->name('userdash');
+    
+    Route::get('/livewire/team-dashboard', TeamDashboard::class)->name('teamdash');
 });
