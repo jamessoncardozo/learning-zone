@@ -1,4 +1,4 @@
-<div class="bg-no-repeat bg-center ..." style="background-image: url(https://github.com/jamessoncardozo/Estoque-Novo/blob/a27d9d044a8163af0d4c979bfb9630e769203c4f/githubbanner.png)"></div>
+<div class="bg-no-repeat bg-center h-8" style="background-image: url(https://github.com/jamessoncardozo/Estoque-Novo/blob/a27d9d044a8163af0d4c979bfb9630e769203c4f/githubbanner.png)"></div>
 
 ![Logo](https://github.com/jamessoncardozo/Estoque-Novo/blob/a27d9d044a8163af0d4c979bfb9630e769203c4f/githubbanner.png)
 
