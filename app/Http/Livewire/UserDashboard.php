@@ -5,8 +5,10 @@ namespace App\Http\Livewire;
 use App\Models\User;
 
 use App\Exports\UsersExport;
-use app\Exports\UsersFromQueryExport;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+
+use App\Mail\OrderShipped;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,7 +17,7 @@ class UserDashboard extends Component
 {
   use WithPagination;
 
-  public $search=null;
+  public $mailedusers, $exportdata, $search=null;
 
   public $sortField='updated_at';
 
@@ -26,6 +28,7 @@ class UserDashboard extends Component
   public $paginate=10;
 
   protected $query;
+
 
   public function sortBy($field){
 
@@ -42,9 +45,16 @@ class UserDashboard extends Component
   }
 
   public function render()
-  {       
+  {
+        // faz a busca e atribui o builder para a variável protegida;
+
         $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection);
-        
+
+        // Captura todos os usuários e atribui à variável publica para 
+        // a variável de usuários para serem enviados por e-mail;
+
+        $this->mailedusers = $this->query->get();
+
         return view('livewire.user-dashboard', [
 
         'users' => $this->query->paginate($this->paginate),
@@ -52,36 +62,62 @@ class UserDashboard extends Component
       ]);
   }
 
-  public function updatedSearch(){
+  public function sendUsers()
+  {
 
-    $this->notifica('Você pesquisou por: '.$this->search,'success');
+    Mail::to('jamessoncardozo@gmail.com')->send(new OrderShipped($this->mailedusers->all()));
+    
+    $this->notifica('Enviado', 'E-mail enviado com sucesso','success');
+ 
+    $this->emitSelf('$refresh');
+
+  }
+
+  public function updatedMailedusers(){
+
+    $this->notifica('Pesquisa','O valor é: '.$this->query[0]->name,'success');
 
   }
 
   public function exportXLSX() 
   {
-    if(!$this->query){
-      $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
 
-      return (new UsersExport($this->query->modelKeys()))->download('users.xlsx');
+    session()->forget('excel.cache');
 
-    }else{
+    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
 
-      return (new UsersExport($this->query->modelKeys()))->download('users.xlsx');
+    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
+
+      return (new UsersExport($this->exportdata->modelKeys()))->download('users.xlsx');
 
     }
   }
 
+  public function exportXLS() 
+  {
+
+    session()->forget('excel.cache');
+
+    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+
+    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
+
+      return (new UsersExport($this->exportdata->modelKeys()))->download('users.xls');
+
+    }
+
+  }
+
   public function exportCSV() 
   { 
-    if(!$this->query){
-      $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+  
+    session()->forget('excel.cache');
 
-      return (new UsersExport($this->query->modelKeys()))->download('users.csv');
+    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
 
-    }else{
+    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
 
-      return (new UsersExport($this->query->modelKeys()))->download('users.csv');
+      return (new UsersExport($this->exportdata->modelKeys()))->download('users.csv');
 
     }
 
@@ -89,22 +125,25 @@ class UserDashboard extends Component
 
   
   public function exportPDF() 
-  { 
-    if(!$this->query){
-      $this->query = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+  {
 
-      return (new UsersExport($this->query->modelKeys()))->download('users.pdf');
+    session()->forget('excel.cache');
 
-    }else{
+    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
 
-      return (new UsersExport($this->query->modelKeys()))->download('users.pdf');
+    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
+
+      return (new UsersExport($this->exportdata->modelKeys()))->download('users.pdf');
 
     }
+
   }
 
-  public function notifica($message,$style)
-  {
-      session()->flash('flash.banner', $message);
-      session()->flash('flash.bannerStyle', $style);
+  public function notifica($title, $message,$style)
+  { 
+
+    $this->dispatchBrowserEvent('alert',
+    ['type' => $style, 'title' => $title, 'message' => $message]);
+    
   }
 }

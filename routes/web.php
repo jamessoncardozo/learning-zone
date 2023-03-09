@@ -5,6 +5,8 @@ use app\Exports\UsersExport;
 use App\http\Livewire\TestingComponents;
 use App\Http\Livewire\TeamDashboard;
 use App\Http\Livewire\UserDashboard;
+use App\Mail\OrderShipped;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,8 @@ Route::middleware([
 ])->group(function () {
   
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+
+    Route::get('/admin', function () {return view('admin');})->name('admin');
 
     Route::get('/livewire/user-dashboard', UserDashboard::class)->name('userdash');
     
