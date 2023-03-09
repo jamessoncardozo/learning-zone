@@ -1,5 +1,4 @@
-
-https://www.canva.com/design/DAFctBI1Y3g/view
+<div class="bg-no-repeat bg-center ..." style="background-image: url(https://github.com/jamessoncardozo/Estoque-Novo/blob/79baed7b1ae7db738f2b2450adae556b358cb7b3/git%20hub%20banner.png)"></div>
 
 Ambiente de Teste do projeto Estoque da TI
 # Estoque Novo
