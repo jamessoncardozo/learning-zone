@@ -26,7 +26,8 @@ class OrderShipped extends Mailable implements ShouldQueue
    */
   public function __construct(
     protected $users
-    ) { }
+    ) { 
+    }
 
   /**
    * Get the message envelope.
@@ -54,7 +55,7 @@ class OrderShipped extends Mailable implements ShouldQueue
         markdown: 'emails.orders.shipped',
         with: [
             'url' => $this->orderUrl,
-            'users' => $this->users,
+            'users' => $this->users->all(),
           ],
 
       );
