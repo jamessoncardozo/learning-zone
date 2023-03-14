@@ -55,6 +55,8 @@
             E-MAIL
           </x-jet-button>
 
+          
+
         <div class="mb-1 md:m-1 mx-1 bg-amber-500 dark:bg-orange-900 ring-amber-800 rounded-lg w-full md:w-1/6 flex justify-center">
 
           <div @click.away="openSort = false" class="relative w-full" x-data="{ openSort: false,sortType:'10' }">
@@ -127,7 +129,9 @@
 
           <x-slot name="head" >
 
-            <x-table.heading wire:click="sortBy('name')">#: </x-table.heading>
+            <x-table.heading></x-table.heading>
+
+            <x-table.heading>#:</x-table.heading>
 
             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null">Nome: </x-table.heading>
             
@@ -142,14 +146,15 @@
           <x-slot name="body">
           
             @forelse ($users as $user)
-              
               <x-table.row class="transition-all hover:bg-gray-100 hover:shadow-lg">
 
                 <x-table.cell>
-                  <x-jet-checkbox id="id" type="checkbox" class="form-checkbox h-5 w-5 text-green-600" wire:model="selectedUsers.{{ $user->id }}" />
+
+                  <x-jet-checkbox id="id" type="checkbox" class="form-checkbox h-5 w-5 text-green-600" wire:model="selectedUsers.{{ $user->id }}" />  
 
                 </x-table.cell>
                 
+                <x-table.cell>{{ $user->id}} </x-table.cell>
                 <x-table.cell>{{ $user->name}} </x-table.cell>
 
                 <x-table.cell>{{ $user->email}} </x-table.cell>
@@ -164,7 +169,7 @@
 
             <x-table.row>
 
-                <x-table.cell colspan="4">
+                <x-table.cell colspan="6">
                   <div class="flex justify-center items-center space-x-2">
                     <ion-icon name="file-tray-full-outline" class="h-8 w-8 text-gray-300"></ion-icon>
                     <span class="font-medium py-8 text-gray-500 text-xl">Não foi localizado nenhum usuário.</span>
@@ -191,4 +196,4 @@
   window.addEventListener('name-updated', event => {
       alert('Name updated to: ' + event.detail.newName);
   })
-  </script>
+</script>

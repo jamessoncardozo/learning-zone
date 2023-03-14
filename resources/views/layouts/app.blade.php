@@ -29,14 +29,15 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased  bg-gray-100 dark:bg-green-100">
+    <body class="font-sans antialiased  bg-gray-100 dark:bg-green-500">
 
         <div class="min-h-screen">
+            <x-jet-validation-errors class="mb-1"/>
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-pink-100 dark:bg-pink-500 shadow-md">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

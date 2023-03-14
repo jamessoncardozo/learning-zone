@@ -20,18 +20,15 @@ class UserDashboard extends Component
   use WithPagination;
 
   public $mailedusers, $exportdata, $search=null;
-  
   public ?Collection $selectedUsers; //a interrogação tranforma esse propriedade como nulo por default
-  
+  public ?Collection $usuarios;
+
   public $sortField='updated_at';
-
   public $sortDirection = 'asc';
-
   public $paginate=10;
 
   protected $queryString =['sortDirection'];
-
-   protected $query;
+  protected $query;
 
 
   public function sortBy($field){
@@ -51,7 +48,7 @@ class UserDashboard extends Component
   public function mount()
   {
     $this->selectedUsers=null;
-
+    $this->reloadData();
   }
 
   public function render()
@@ -83,20 +80,23 @@ class UserDashboard extends Component
   }
 
   public function updatedSelectedusers(){
-    dd($this->selectedUsers);
-    $this->notifica('Pesquisa','O valor é: '.$this->query[0]->name,'success');
+   
+    /*$this->notifica('Pesquisa','O valor é: '.$this->query[0]->name,'success');*/
 
   }
 
   public function exportXLSX() 
   {
+    
 
     session()->forget('excel.cache');
+    
+    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
 
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+    /*$this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();*/
 
     if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
+      
       return (new UsersExport($this->exportdata->modelKeys()))->download('users.xlsx');
 
     }
@@ -148,9 +148,20 @@ class UserDashboard extends Component
 
   }
 
+  public function reloadData() 
+  {   /* É tipo um reset data. pra limpar a tela, voltar ao estado original*/
+      /* $this->selectedCategory = null;*/
+      
+      $this->usuarios = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get(); //recarrega os produtos com usuários
+      $this->selectedUsers = $this->usuarios
+          ->map(fn($user) => $user->id)
+          ->flip()
+          ->map(fn($user) => false); //*define todos os produtos selecionados como falso
+  }
+
   private function getSelectedUsers()
   {
-      return $this->getSelectedUsers->filter(fn($p) => $p)->keys();
+      return dd($this->selectedUsers->filter(fn($p) => $p)->keys());
   }
 
   public function notifica($title, $message,$style)
