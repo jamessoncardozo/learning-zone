@@ -6,6 +6,8 @@ use App\Models\User;
 
 use App\Exports\UsersExport;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Collection;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Mail\OrderShipped;
@@ -18,16 +20,18 @@ class UserDashboard extends Component
   use WithPagination;
 
   public $mailedusers, $exportdata, $search=null;
-
+  
+  public ?Collection $selectedUsers; //a interrogação tranforma esse propriedade como nulo por default
+  
   public $sortField='updated_at';
 
   public $sortDirection = 'asc';
 
-  protected $queryString =['sortDirection'];
-
   public $paginate=10;
 
-  protected $query;
+  protected $queryString =['sortDirection'];
+
+   protected $query;
 
 
   public function sortBy($field){
@@ -41,6 +45,12 @@ class UserDashboard extends Component
     : 'asc';
         
     $this->sortField=$field;
+
+  }
+
+  public function mount()
+  {
+    $this->selectedUsers=null;
 
   }
 
@@ -64,17 +74,16 @@ class UserDashboard extends Component
 
   public function sendUsers()
   {
-
-    Mail::to('jamessoncardozo@gmail.com')->send(new OrderShipped($this->mailedusers->all()));
+    Mail::to('jamessoncardozo@gmail.com')->send(new OrderShipped($this->mailedusers));
     
     $this->notifica('Enviado', 'E-mail enviado com sucesso','success');
  
-    $this->emitSelf('$refresh');
+    //$this->emitSelf('$refresh');
 
   }
 
-  public function updatedMailedusers(){
-
+  public function updatedSelectedusers(){
+    dd($this->selectedUsers);
     $this->notifica('Pesquisa','O valor é: '.$this->query[0]->name,'success');
 
   }
@@ -137,6 +146,11 @@ class UserDashboard extends Component
 
     }
 
+  }
+
+  private function getSelectedUsers()
+  {
+      return $this->getSelectedUsers->filter(fn($p) => $p)->keys();
   }
 
   public function notifica($title, $message,$style)

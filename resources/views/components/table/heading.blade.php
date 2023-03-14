@@ -23,19 +23,19 @@
 
         @if ($direction === 'asc')
         
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-200 dark:text-gray-600 fill-blue-600" viewBox="0 0 512 512">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-600 fill-blue-600" viewBox="0 0 512 512">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 328l144-144 144 144"/>
           </svg>
 
         @elseif ($direction ==='desc')
 
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-200 dark:text-gray-600 fill-blue-600" viewBox="0 0 512 512">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-600 fill-blue-600" viewBox="0 0 512 512">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/>
           </svg>
 
         @else
 
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-200 dark:text-gray-600 fill-blue-600" viewBox="0 0 512 512">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-600 fill-blue-600" viewBox="0 0 512 512">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M464 208L352 96 240 208M352 113.13V416M48 304l112 112 112-112M160 398V96"/>
           </svg>
 

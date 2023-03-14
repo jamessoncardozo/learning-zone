@@ -18,6 +18,14 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        MessageSending::class => [
+          LogSendingMessage::class,
+      ],
+   
+      MessageSent::class => [
+          LogSentMessage::class,
+      ],
     ];
 
     /**
