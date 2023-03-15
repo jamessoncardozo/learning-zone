@@ -75,7 +75,7 @@ class UserDashboard extends Component
     
     $this->notifica('Enviado', 'E-mail enviado com sucesso','success');
  
-    //$this->emitSelf('$refresh');
+    $this->reloadData();
 
   }
 
@@ -96,6 +96,8 @@ class UserDashboard extends Component
     /*$this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();*/
 
     if(count($this->exportdata) > 0){ // se a query achar alguma coisa
+
+      $this->reloadData();
       
       return (new UsersExport($this->exportdata->modelKeys()))->download('users.xlsx');
 
@@ -107,9 +109,11 @@ class UserDashboard extends Component
 
     session()->forget('excel.cache');
 
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
 
     if(count($this->exportdata) > 0){ // se a query achar alguma coisa
+
+      $this->reloadData();
 
       return (new UsersExport($this->exportdata->modelKeys()))->download('users.xls');
 
@@ -122,10 +126,11 @@ class UserDashboard extends Component
   
     session()->forget('excel.cache');
 
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
 
     if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
+      
+      $this->reloadData();
       return (new UsersExport($this->exportdata->modelKeys()))->download('users.csv');
 
     }
@@ -138,10 +143,10 @@ class UserDashboard extends Component
 
     session()->forget('excel.cache');
 
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
 
     if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
+      $this->reloadData();
       return (new UsersExport($this->exportdata->modelKeys()))->download('users.pdf');
 
     }

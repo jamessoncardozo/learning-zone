@@ -122,7 +122,6 @@
         <script src="//unpkg.com/alpinejs" defer></script>
 
       </div>
-      Show Selected Users: {{ var_export($selectedUsers) }}
 
       <div class="flex items-center bg-white overflow-hidden shadow-xl sm:rounded-lg m-1 md:my-2">
         <x-table class="grid grid-cols-4 md:grid-cols-none">
