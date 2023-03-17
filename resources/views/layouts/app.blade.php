@@ -54,8 +54,7 @@
         @stack('modals')
 
         @livewireScripts
-        <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule="" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
+
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
         <script>
@@ -88,6 +87,7 @@
               themeToggleLightIcon.classList.toggle('hidden');
 
               // if set via local storage previously
+
               if (localStorage.getItem('color-theme')) {
                   if (localStorage.getItem('color-theme') === 'light') {
                       document.documentElement.classList.add('dark');
@@ -98,6 +98,7 @@
                   }
 
               // if NOT set via local storage previously
+
               } else {
                   if (document.documentElement.classList.contains('dark')) {
                       document.documentElement.classList.remove('dark');

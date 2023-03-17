@@ -11,9 +11,12 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Mail\OrderShipped;
-
+use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
+use PhpParser\Node\Stmt\TryCatch;
+use Ramsey\Uuid\Type\Integer;
+use Throwable;
 
 class UserDashboard extends Component
 {
@@ -21,7 +24,7 @@ class UserDashboard extends Component
 
   public $mailedusers, $exportdata, $search=null;
   public ?Collection $selectedUsers; //a interrogação tranforma esse propriedade como nulo por default
-  public ?Collection $usuarios;
+  public $usuarios;
 
   public $sortField='updated_at';
   public $sortDirection = 'asc';
@@ -75,82 +78,38 @@ class UserDashboard extends Component
     
     $this->notifica('Enviado', 'E-mail enviado com sucesso','success');
  
-    $this->reloadData();
+    $this->reloadData(); // chama o método para recarregar a tabela e zerar as seleções.
 
   }
 
-  public function updatedSelectedusers(){
-   
-    /*$this->notifica('Pesquisa','O valor é: '.$this->query[0]->name,'success');*/
-
-  }
-
-  public function exportXLSX() 
+  public function showName($userId)
   {
-    
-
-    session()->forget('excel.cache');
-    
-    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
-
-    /*$this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();*/
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
-      $this->reloadData();
-      
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.xlsx');
-
-    }
+      $user = User::find($userId);
+      if ($user) {
+          $this->notifica('O usuario selecionado é: ', $user->name, 'success');
+      }
   }
-
-  public function exportXLS() 
-  {
-
-    session()->forget('excel.cache');
-
-    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
-      $this->reloadData();
-
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.xls');
-
-    }
-
-  }
-
-  public function exportCSV() 
-  { 
   
-    session()->forget('excel.cache');
 
-    $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-      
-      $this->reloadData();
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.csv');
-
-    }
-
-  }
-
-  
-  public function exportPDF() 
+  public function exporting($extension) 
   {
-
     session()->forget('excel.cache');
 
     $this->exportdata = User::whereIn('id',$this->selectedUsers->filter(fn($p) => $p)->keys()->toArray())->get();
 
     if(count($this->exportdata) > 0){ // se a query achar alguma coisa
+
       $this->reloadData();
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.pdf');
+
+      return (new UsersExport($this->exportdata->modelKeys()))->download('users.'.$extension);
+
+    }else{// se nenhum usuário for selecionado
+
+      $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
+
+      return (new UsersExport($this->exportdata->modelKeys()))->download('users.'.$extension);
 
     }
-
   }
 
   public function reloadData() 

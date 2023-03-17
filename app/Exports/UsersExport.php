@@ -45,15 +45,21 @@ class UsersExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
   public function map($user): array
   {
     try {
+
       $created_at = DateTime::createFromFormat('d-m-Y H:i:s', $user->created_at);
 
       if ($created_at !== false) {
-          $created_at = $created_at->format('d-m-Y');
+
+        $created_at = $created_at->format('d-m-Y');
+
       } else {
-          $created_at = $user->created_at;
+
+        $created_at = $user->created_at;
       }
     } catch (\Exception $e) {
-        $created_at = $user->created_at;
+
+      $created_at = $user->created_at;
+      
     }
 
     return [
