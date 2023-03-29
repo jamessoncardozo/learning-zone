@@ -2,10 +2,10 @@
 
 ![Logo](https://github.com/jamessoncardozo/Estoque-Novo/blob/a27d9d044a8163af0d4c979bfb9630e769203c4f/githubbanner.png)
 
-Ambiente de Teste do projeto Estoque da TI
+Enviroment Testing
 # Estoque Novo
 
-Esse é um ambiente de versionamento do projeto Estoque da TI da PMS.
+Esse é um ambiente de versionamento de projetos e funcionalidades.
 Atente-se às branchs.
 
 
@@ -15,7 +15,7 @@ Esse é o meu espaço para desenvolvimento e teste de novas funcionalidades. Fiq
 
 ## Stack utilizada
 
-**Front-end:** TailwindCSS
+**Front-end:** TailwindCSS, Alpine.js & Jetstream
 
-**Back-end:** Laravel, Livewire e Alpine.js
+**Back-end:** Laravel, Livewire
 
