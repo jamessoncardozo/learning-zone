@@ -16,10 +16,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      * @param  array<string, string>  $input
      */
     public function update(User $user, array $input): void
-    {
+    {   
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'user_name' => ['string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'github_url' => ['url', 'max:255'],
+            'linkedin_url' => ['url', 'max:255'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -34,6 +37,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'user_name' => $input['user_name'],
+                'github_url' => $input['github_url'],
+                'linkedin_url' => $input['linkedin_url'],
             ])->save();
         }
     }
@@ -48,9 +54,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $user->forceFill([
             'name' => $input['name'],
             'email' => $input['email'],
+            'user_name' => $input['user_name'],
+            'github_url' => $input['github_url'],
+            'linkedin_url' => $input['linkedin_url'],
             'email_verified_at' => null,
         ])->save();
 
         $user->sendEmailVerificationNotification();
     }
+
+
 }
