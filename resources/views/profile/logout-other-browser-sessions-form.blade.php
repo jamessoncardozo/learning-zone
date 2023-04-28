@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <x-action-section>
     <x-slot name="title">
         {{ __('Browser Sessions') }}
@@ -5,6 +6,15 @@
 
     <x-slot name="description">
         {{ __('Manage and log out your active sessions on other browsers and devices.') }}
+=======
+<x-jet-action-section>
+    <x-slot name="title">
+        {{ __('Sessões Ativas') }}
+    </x-slot>
+
+    <x-slot name="description">
+        {{ __('Administre e desconecte suas seções ativas em outros naveadores e dispositivos.') }}
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     </x-slot>
 
     <x-slot name="content">
@@ -31,7 +41,11 @@
 
                         <div class="ml-3">
                             <div class="text-sm text-gray-600">
+<<<<<<< HEAD
                                 {{ $session->agent->platform() ? $session->agent->platform() : __('Unknown') }} - {{ $session->agent->browser() ? $session->agent->browser() : __('Unknown') }}
+=======
+                                {{ $session->agent->platform() ? $session->agent->platform() : __('Desconhecido') }} - {{ $session->agent->browser() ? $session->agent->browser() : __('Desconhecido') }}
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                             </div>
 
                             <div>
@@ -39,9 +53,15 @@
                                     {{ $session->ip_address }},
 
                                     @if ($session->is_current_device)
+<<<<<<< HEAD
                                         <span class="text-green-500 font-semibold">{{ __('This device') }}</span>
                                     @else
                                         {{ __('Last active') }} {{ $session->last_active }}
+=======
+                                        <span class="text-green-500 font-semibold">{{ __('Este dispositivo') }}</span>
+                                    @else
+                                        {{ __('Último ativo') }} {{ $session->last_active }}
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                                     @endif
                                 </div>
                             </div>
@@ -52,6 +72,7 @@
         @endif
 
         <div class="flex items-center mt-5">
+<<<<<<< HEAD
             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
                 {{ __('Log Out Other Browser Sessions') }}
             </x-button>
@@ -74,15 +95,44 @@
                     <x-input type="password" class="mt-1 block w-3/4"
                                 autocomplete="current-password"
                                 placeholder="{{ __('Password') }}"
+=======
+            <x-jet-button wire:click="confirmLogout" wire:loading.attr="disabled">
+                {{ __('Desconectar de outras sessões de navegadores') }}
+            </x-jet-button>
+
+            <x-jet-action-message class="ml-3" on="loggedOut">
+                {{ __('Feito.') }}
+            </x-jet-action-message>
+        </div>
+
+        <!-- Log Out Other Devices Confirmation Modal -->
+        <x-jet-dialog-modal wire:model="confirmingLogout">
+            <x-slot name="title">
+              {{ __('Desconectar de outras sessões de navegadores') }}
+            </x-slot>
+
+            <x-slot name="content">
+                {{ __('Por favor, informe sua senha para confirmar que você quer desconectar de outras de outras sessõesao de todos os navegadores ou dispositivos.') }}
+
+                <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
+                    <x-jet-input type="password" class="mt-1 block w-3/4"
+                                autocomplete="current-password"
+                                placeholder="{{ __('Senha') }}"
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                                 x-ref="password"
                                 wire:model.defer="password"
                                 wire:keydown.enter="logoutOtherBrowserSessions" />
 
+<<<<<<< HEAD
                     <x-input-error for="password" class="mt-2" />
+=======
+                    <x-jet-input-error for="password" class="mt-2" />
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                 </div>
             </x-slot>
 
             <x-slot name="footer">
+<<<<<<< HEAD
                 <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
@@ -96,3 +146,18 @@
         </x-dialog-modal>
     </x-slot>
 </x-action-section>
+=======
+                <x-jet-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
+                    {{ __('Cancelar') }}
+                </x-jet-secondary-button>
+
+                <x-jet-button class="ml-3"
+                            wire:click="logoutOtherBrowserSessions"
+                            wire:loading.attr="disabled">
+                    {{ __('Desconectar outras sessões') }}
+                </x-jet-button>
+            </x-slot>
+        </x-jet-dialog-modal>
+    </x-slot>
+</x-jet-action-section>
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6

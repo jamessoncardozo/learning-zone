@@ -45,6 +45,7 @@ class UsersExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
   public function map($user): array
   {
     try {
+<<<<<<< HEAD
       $created_at = DateTime::createFromFormat('d-m-Y H:i:s', $user->created_at);
 
       if ($created_at !== false) {
@@ -54,6 +55,23 @@ class UsersExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
       }
     } catch (\Exception $e) {
         $created_at = $user->created_at;
+=======
+
+      $created_at = DateTime::createFromFormat('d-m-Y H:i:s', $user->created_at);
+
+      if ($created_at !== false) {
+
+        $created_at = $created_at->format('d-m-Y');
+
+      } else {
+
+        $created_at = $user->created_at;
+      }
+    } catch (\Exception $e) {
+
+      $created_at = $user->created_at;
+      
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     }
 
     return [
@@ -89,7 +107,10 @@ class UsersExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
   public function failed(Throwable $exception): void
   {
       // handle failed export
+<<<<<<< HEAD
     dd($exception);
+=======
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
   }
 
 }

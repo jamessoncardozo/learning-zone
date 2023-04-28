@@ -1,7 +1,13 @@
 <x-guest-layout>
+<<<<<<< HEAD
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
+=======
+    <x-jet-authentication-card>
+        <x-slot name="logo">
+            <x-jet-authentication-card-logo />
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -19,27 +25,45 @@
                 @csrf
 
                 <div>
+<<<<<<< HEAD
                     <x-button type="submit">
                         {{ __('Resend Verification Email') }}
                     </x-button>
+=======
+                    <x-jet-button type="submit">
+                        {{ __('Resend Verification Email') }}
+                    </x-jet-button>
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                 </div>
             </form>
 
             <div>
                 <a
                     href="{{ route('profile.show') }}"
+<<<<<<< HEAD
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+=======
+                    class="underline text-sm text-gray-600 hover:text-gray-900"
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                 >
                     {{ __('Edit Profile') }}</a>
 
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
 
+<<<<<<< HEAD
                     <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2">
+=======
+                    <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
                         {{ __('Log Out') }}
                     </button>
                 </form>
             </div>
         </div>
+<<<<<<< HEAD
     </x-authentication-card>
+=======
+    </x-jet-authentication-card>
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 </x-guest-layout>

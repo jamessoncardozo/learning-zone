@@ -181,12 +181,21 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+<<<<<<< HEAD
         Maatwebsite\Excel\ExcelServiceProvider::class,
+=======
+
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 
         /*
          * Package Service Providers...
          */
+<<<<<<< HEAD
 
+=======
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
         /*
          * Application Service Providers...
          */
@@ -214,6 +223,10 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+<<<<<<< HEAD
+=======
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+>>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 
     ])->toArray(),
 
