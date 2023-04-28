@@ -8,4 +8,3 @@
     {{ $attributes->merge(['class' => 'text-sm text-gray-600']) }}>
     {{ $slot->isEmpty() ? 'Salvo.' : $slot }}
 </div>
-{{ var_export($on) }}

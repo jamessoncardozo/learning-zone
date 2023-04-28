@@ -29,86 +29,44 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased  bg-gray-100 dark:bg-green-500">
+    <body class="font-sans antialiased  bg-gray-100 dark:bg-slate-700">
 
         <div class="min-h-screen">
-            <x-jet-validation-errors class="mb-1"/>
-            @livewire('navigation-menu')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-pink-100 dark:bg-pink-500 shadow-md">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+          <x-jet-validation-errors class="mb-1"/>
 
-            <!-- Page Content -->
-            <main>
-           
+          @livewire('navigation-menu')
+
+          <!-- Page Heading -->
+          @if (isset($header))
+            <header class="bg-white dark:bg-slate-900 shadow-md">
+              <div class="dark:text-white max-w-max mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+              </div>
+            </header>
+          @endif
+
+          <!-- Page Content -->
+          <main>
             {{ $slot }}
-            </main>
+          </main>
         </div>
 
         @stack('modals')
 
         @livewireScripts
-
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
-        <script>
-          
-          var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-          var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-          var themeToggleBtn = document.getElementById('theme-toggle');
-
+        <script>          
           window.addEventListener('alert', event => {
-                  toastr[event.detail.type](event.detail.message,
-                      event.detail.title ?? ''), toastr.options = {
-                      "closeButton": true,
-                      "progressBar": true,
-                  }
-          });
-
-
-          // Change the icons inside the button based on previous settings
-          if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-              themeToggleLightIcon.classList.remove('hidden');
-          } else {
-              themeToggleDarkIcon.classList.remove('hidden');
-          }
-
-
-          themeToggleBtn.addEventListener('click', function() {
-
-              // toggle icons inside button
-              themeToggleDarkIcon.classList.toggle('hidden');
-              themeToggleLightIcon.classList.toggle('hidden');
-
-              // if set via local storage previously
-
-              if (localStorage.getItem('color-theme')) {
-                  if (localStorage.getItem('color-theme') === 'light') {
-                      document.documentElement.classList.add('dark');
-                      localStorage.setItem('color-theme', 'dark');
-                  } else {
-                      document.documentElement.classList.remove('dark');
-                      localStorage.setItem('color-theme', 'light');
-                  }
-
-              // if NOT set via local storage previously
-
-              } else {
-                  if (document.documentElement.classList.contains('dark')) {
-                      document.documentElement.classList.remove('dark');
-                      localStorage.setItem('color-theme', 'light');
-                  } else {
-                      document.documentElement.classList.add('dark');
-                      localStorage.setItem('color-theme', 'dark');
-                  }
-              }
-              
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            }
           });
       </script>
     </body>

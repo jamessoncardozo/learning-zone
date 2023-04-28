@@ -24,7 +24,7 @@ class UserDashboard extends Component
 
   public $mailedusers, $exportdata, $search=null;
   public ?Collection $selectedUsers; //a interrogação tranforma esse propriedade como nulo por default
-  public $usuarios;
+  public $usuarios, $usuario;
 
   public $sortField='updated_at';
   public $sortDirection = 'asc';
@@ -89,6 +89,15 @@ class UserDashboard extends Component
           $this->notifica('O usuario selecionado é: ', $user->name, 'success');
       }
   }
+
+  public function generateCardBusiness($userId)
+  {
+    $user = User::find($userId);
+    
+    if ($user) {
+      $this->usuario = $user->id;
+    }
+  }
   
 
   public function exporting($extension) 
@@ -121,11 +130,6 @@ class UserDashboard extends Component
           ->map(fn($user) => $user->id)
           ->flip()
           ->map(fn($user) => false); //*define todos os produtos selecionados como falso
-  }
-
-  private function getSelectedUsers()
-  {
-      return dd($this->selectedUsers->filter(fn($p) => $p)->keys());
   }
 
   public function notifica($title, $message,$style)
