@@ -2,13 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use app\Exports\UsersExport;
-<<<<<<< HEAD
 use App\http\Livewire\TestingComponents;
-=======
-use App\Http\Livewire\BusinessCard;
-use App\Http\Livewire\BusinessProfile;
-use App\Http\Livewire\BusinessImage;
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 use App\Http\Livewire\TeamDashboard;
 use App\Http\Livewire\UserDashboard;
 use App\Mail\OrderShipped;
@@ -29,10 +23,6 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-<<<<<<< HEAD
-=======
-Route::get('/livewire/business-profile', BusinessProfile::class)->name('business-profile');
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 
 Route::middleware([
     'auth:sanctum',
@@ -45,14 +35,6 @@ Route::middleware([
     Route::get('/admin', function () {return view('admin');})->name('admin');
 
     Route::get('/livewire/user-dashboard', UserDashboard::class)->name('userdash');
-<<<<<<< HEAD
     
-=======
-
-    Route::get('/livewire/business-card/{id}', BusinessCard::class)->name('business-card');
-
-    Route::get('/livewire/business-image/{id}', BusinessImage::class)->name('business-image');
-
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     Route::get('/livewire/team-dashboard', TeamDashboard::class)->name('teamdash');
 });

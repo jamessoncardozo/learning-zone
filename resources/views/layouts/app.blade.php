@@ -8,13 +8,6 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-<<<<<<< HEAD
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-=======
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
@@ -32,21 +25,19 @@
               document.documentElement.classList.remove('dark')
           }
         </script>
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 
         <!-- Styles -->
         @livewireStyles
     </head>
-<<<<<<< HEAD
-    <body class="font-sans antialiased">
-        <x-banner />
+    <body class="font-sans antialiased  bg-gray-100 dark:bg-green-500">
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
+            <x-jet-validation-errors class="mb-1"/>
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-pink-100 dark:bg-pink-500 shadow-md">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -55,52 +46,70 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
-            </main>
-=======
-    <body class="font-sans antialiased  bg-gray-100 dark:bg-slate-700">
-
-        <div class="min-h-screen">
-
-          <x-jet-validation-errors class="mb-1"/>
-
-          @livewire('navigation-menu')
-
-          <!-- Page Heading -->
-          @if (isset($header))
-            <header class="bg-white dark:bg-slate-900 shadow-md">
-              <div class="dark:text-white max-w-max mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-              </div>
-            </header>
-          @endif
-
-          <!-- Page Content -->
-          <main>
+           
             {{ $slot }}
-          </main>
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
+            </main>
         </div>
 
         @stack('modals')
 
         @livewireScripts
-<<<<<<< HEAD
-=======
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        
+
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
-        <script>          
+        <script>
+          
+          var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+          var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+          var themeToggleBtn = document.getElementById('theme-toggle');
+
           window.addEventListener('alert', event => {
-            toastr[event.detail.type](event.detail.message,
-                event.detail.title ?? ''), toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-            }
+                  toastr[event.detail.type](event.detail.message,
+                      event.detail.title ?? ''), toastr.options = {
+                      "closeButton": true,
+                      "progressBar": true,
+                  }
+          });
+
+
+          // Change the icons inside the button based on previous settings
+          if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+              themeToggleLightIcon.classList.remove('hidden');
+          } else {
+              themeToggleDarkIcon.classList.remove('hidden');
+          }
+
+
+          themeToggleBtn.addEventListener('click', function() {
+
+              // toggle icons inside button
+              themeToggleDarkIcon.classList.toggle('hidden');
+              themeToggleLightIcon.classList.toggle('hidden');
+
+              // if set via local storage previously
+
+              if (localStorage.getItem('color-theme')) {
+                  if (localStorage.getItem('color-theme') === 'light') {
+                      document.documentElement.classList.add('dark');
+                      localStorage.setItem('color-theme', 'dark');
+                  } else {
+                      document.documentElement.classList.remove('dark');
+                      localStorage.setItem('color-theme', 'light');
+                  }
+
+              // if NOT set via local storage previously
+
+              } else {
+                  if (document.documentElement.classList.contains('dark')) {
+                      document.documentElement.classList.remove('dark');
+                      localStorage.setItem('color-theme', 'light');
+                  } else {
+                      document.documentElement.classList.add('dark');
+                      localStorage.setItem('color-theme', 'dark');
+                  }
+              }
+              
           });
       </script>
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     </body>
 </html>

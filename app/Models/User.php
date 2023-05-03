@@ -8,10 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
-<<<<<<< HEAD
-=======
 use Laravel\Jetstream\HasTeams;
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -19,29 +16,17 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
-<<<<<<< HEAD
-=======
     use HasTeams;
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     use Notifiable;
     use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
      *
-<<<<<<< HEAD
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-=======
      * @var string<int, string>
      */
     protected $fillable = [
         'name', 'email', 'password',
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     ];
 
     /**

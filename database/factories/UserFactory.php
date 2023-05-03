@@ -23,48 +23,26 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-<<<<<<< HEAD
     {
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-=======
-    {   
-        $name = $this->faker->unique()->name();
-        $username = Str::slug($name,'');
-        $github = 'https://www.github.com/'.Str::slug($name,'');
-        $linkedin = 'https://www.linkedin.com/in/'.Str::slug($name,'');
-        
-        return [
-            'name' => $name,
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => $this->faker->date($format = 'd-m-Y', $max = 'now'),
-            'created_at' => $this->faker->date($format = 'd-m-Y', $max = 'now'),
-            'updated_at' => $this->faker->date($format = 'd-m-Y', $max = 'now'),
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
+            'created_at' => now(),
+            'updated_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
-<<<<<<< HEAD
-=======
-            'user_name' => $username,
-            'github_url' => $github,
-            'linkedin_url' => $linkedin,
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
         ];
     }
 
     /**
      * Indicate that the model's email address should be unverified.
-<<<<<<< HEAD
-=======
      *
      * @return $this
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
      */
     public function unverified(): static
     {
@@ -77,11 +55,8 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-<<<<<<< HEAD
-=======
      *
      * @return $this
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
      */
     public function withPersonalTeam(): static
     {

@@ -11,40 +11,20 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Mail\OrderShipped;
-<<<<<<< HEAD
-
-use Livewire\Component;
-use Livewire\WithPagination;
-=======
 use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
 use PhpParser\Node\Stmt\TryCatch;
 use Ramsey\Uuid\Type\Integer;
 use Throwable;
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 
 class UserDashboard extends Component
 {
   use WithPagination;
 
   public $mailedusers, $exportdata, $search=null;
-<<<<<<< HEAD
-  
   public ?Collection $selectedUsers; //a interrogação tranforma esse propriedade como nulo por default
-  
-  public $sortField='updated_at';
-
-  public $sortDirection = 'asc';
-
-  public $paginate=10;
-
-  protected $queryString =['sortDirection'];
-
-   protected $query;
-=======
-  public ?Collection $selectedUsers; //a interrogação tranforma esse propriedade como nulo por default
-  public $usuarios, $usuario;
+  public $usuarios;
 
   public $sortField='updated_at';
   public $sortDirection = 'asc';
@@ -52,7 +32,6 @@ class UserDashboard extends Component
 
   protected $queryString =['sortDirection'];
   protected $query;
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
 
 
   public function sortBy($field){
@@ -72,11 +51,7 @@ class UserDashboard extends Component
   public function mount()
   {
     $this->selectedUsers=null;
-<<<<<<< HEAD
-
-=======
     $this->reloadData();
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
   }
 
   public function render()
@@ -103,81 +78,6 @@ class UserDashboard extends Component
     
     $this->notifica('Enviado', 'E-mail enviado com sucesso','success');
  
-<<<<<<< HEAD
-    //$this->emitSelf('$refresh');
-
-  }
-
-  public function updatedSelectedusers(){
-    dd($this->selectedUsers);
-    $this->notifica('Pesquisa','O valor é: '.$this->query[0]->name,'success');
-
-  }
-
-  public function exportXLSX() 
-  {
-
-    session()->forget('excel.cache');
-
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.xlsx');
-
-    }
-  }
-
-  public function exportXLS() 
-  {
-
-    session()->forget('excel.cache');
-
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.xls');
-
-    }
-
-  }
-
-  public function exportCSV() 
-  { 
-  
-    session()->forget('excel.cache');
-
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.csv');
-
-    }
-
-  }
-
-  
-  public function exportPDF() 
-  {
-
-    session()->forget('excel.cache');
-
-    $this->exportdata = User::where('name','like','%'.$this->search.'%')->orderBy($this->sortField, $this->sortDirection)->get();
-
-    if(count($this->exportdata) > 0){ // se a query achar alguma coisa
-
-      return (new UsersExport($this->exportdata->modelKeys()))->download('users.pdf');
-
-    }
-
-  }
-
-  private function getSelectedUsers()
-  {
-      return $this->getSelectedUsers->filter(fn($p) => $p)->keys();
-=======
     $this->reloadData(); // chama o método para recarregar a tabela e zerar as seleções.
 
   }
@@ -188,15 +88,6 @@ class UserDashboard extends Component
       if ($user) {
           $this->notifica('O usuario selecionado é: ', $user->name, 'success');
       }
-  }
-
-  public function generateCardBusiness($userId)
-  {
-    $user = User::find($userId);
-    
-    if ($user) {
-      $this->usuario = $user->id;
-    }
   }
   
 
@@ -230,7 +121,11 @@ class UserDashboard extends Component
           ->map(fn($user) => $user->id)
           ->flip()
           ->map(fn($user) => false); //*define todos os produtos selecionados como falso
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
+  }
+
+  private function getSelectedUsers()
+  {
+      return dd($this->selectedUsers->filter(fn($p) => $p)->keys());
   }
 
   public function notifica($title, $message,$style)

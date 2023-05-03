@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-<<<<<<< HEAD
-=======
 
 
 .inicial_card_brand{
@@ -188,4 +186,3 @@
             focus:ring-red-300 p-1.5 hover:bg-red-100 focus:ring-2
             dark:text-red-500 dark:hover:text-white dark:bg-red-800 dark:hover:bg-red-700;
   }
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6

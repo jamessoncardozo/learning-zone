@@ -41,13 +41,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value controls the number of minutes until an issued token will be
-<<<<<<< HEAD
-    | considered expired. This will override any values set in the token's
-    | "expires_at" attribute, but first-party sessions are not affected.
-=======
     | considered expired. If this value is null, personal access tokens do
     | not expire. This won't tweak the lifetime of first-party sessions.
->>>>>>> 7e91912cb809f8841388c30df8462a6d5c7017c6
     |
     */
 
