@@ -1,4 +1,4 @@
-<x-jet-form-section submit="updateProfileInformation">
+<x-form-section submit="updateProfileInformation">
     <x-slot name="title">
         {{ __('Profile Information') }}
     </x-slot>
@@ -24,7 +24,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
 
-                <x-jet-label for="photo" value="{{ __('Photo') }}" />
+                <x-label for="photo" value="{{ __('Photo') }}" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -38,36 +38,36 @@
                     </span>
                 </div>
 
-                <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                <x-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
                     {{ __('Select A New Photo') }}
-                </x-jet-secondary-button>
+                </x-secondary-button>
 
                 @if ($this->user->profile_photo_path)
-                    <x-jet-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
                         {{ __('Remove Photo') }}
-                    </x-jet-secondary-button>
+                    </x-secondary-button>
                 @endif
 
-                <x-jet-input-error for="photo" class="mt-2" />
+                <x-input-error for="photo" class="mt-2" />
             </div>
         @endif
         <div class="col-span-6 sm:col-span-4">
-          <x-jet-secondary-button wire:loading.attr="disabled" wire:click="businessCard">
+          <x-secondary-button wire:loading.attr="disabled" wire:click="businessCard">
               {{ __('Generate Business Card') }}
-          </x-jet-button>
+          </x-button>
         </div>
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name:') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
+            <x-label for="name" value="{{ __('Name:') }}" />
+            <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
+            <x-input-error for="name" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-          <x-jet-label for="email" value="{{ __('E-mail:') }}" />
-          <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" autocomplete="username" />
-          <x-jet-input-error for="email" class="mt-2" />
+          <x-label for="email" value="{{ __('E-mail:') }}" />
+          <x-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" autocomplete="username" />
+          <x-input-error for="email" class="mt-2" />
 
           @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
               <p class="text-sm mt-2">
@@ -89,37 +89,37 @@
 
         <div class="col-span-6 sm:col-span-4">
 
-          <x-jet-label for="user_name" value="{{ __('Username:') }}" />
-          <x-jet-input id="user_name" type="text" class="mt-1 block w-full" wire:model.defer="state.user_name" autocomplete="user_name" />
-          <x-jet-input-error for="user_name" class="mt-2" />
+          <x-label for="user_name" value="{{ __('Username:') }}" />
+          <x-input id="user_name" type="text" class="mt-1 block w-full" wire:model.defer="state.user_name" autocomplete="user_name" />
+          <x-input-error for="user_name" class="mt-2" />
 
         </div>
 
         <div class="col-span-6 sm:col-span-4">
 
-          <x-jet-label for="linkedin_url" value="{{ __('Linkedin URL:') }}" />
-          <x-jet-input id="linkedin_url" type="url" class="mt-1 block w-full" wire:model.defer="state.linkedin_url" autocomplete="linkedin_url" />
-          <x-jet-input-error for="linkedin_url" class="mt-2" />
+          <x-label for="linkedin_url" value="{{ __('Linkedin URL:') }}" />
+          <x-input id="linkedin_url" type="url" class="mt-1 block w-full" wire:model.defer="state.linkedin_url" autocomplete="linkedin_url" />
+          <x-input-error for="linkedin_url" class="mt-2" />
 
         </div>
 
         <div class="col-span-6 sm:col-span-4">
 
-          <x-jet-label for="github_url" value="{{ __('Github URL:') }}" />
-          <x-jet-input id="github_url" type="url" class="mt-1 block w-full" wire:model.defer="state.github_url" autocomplete="github_url" />
-          <x-jet-input-error for="github_url" class="mt-2" />
+          <x-label for="github_url" value="{{ __('Github URL:') }}" />
+          <x-input id="github_url" type="url" class="mt-1 block w-full" wire:model.defer="state.github_url" autocomplete="github_url" />
+          <x-input-error for="github_url" class="mt-2" />
         </div>
 
       </x-slot>
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
-        </x-jet-action-message>
+        </x-action-message>
 
 
 
-        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
+        <x-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Save') }}
-        </x-jet-button>
+        </x-button>
     </x-slot>
-</x-jet-form-section>
+</x-form-section>
