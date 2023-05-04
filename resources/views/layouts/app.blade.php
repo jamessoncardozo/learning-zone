@@ -33,7 +33,7 @@
 
         <div class="min-h-screen">
 
-          <x-jet-validation-errors class="mb-1"/>
+          <x-validation-errors class="mb-1"/>
 
           @livewire('navigation-menu')
 

@@ -9,7 +9,7 @@
 
     <div class="flex-col space-y-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="p-2 sm:py-4">
-        <x-jet-input  type="search" wire:model="search" class="block w-full sm:w-1/3" placeholder="Pesquise um usuário..."/>
+        <x-input  type="search" wire:model="search" class="block w-full sm:w-1/3" placeholder="Pesquise um usuário..."/>
       </div>
       
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg m-2 md:my-4">
