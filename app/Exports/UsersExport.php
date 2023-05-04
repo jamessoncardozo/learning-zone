@@ -95,6 +95,7 @@ class UsersExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
   public function failed(Throwable $exception): void
   {
       // handle failed export
+    dd($exception);
   }
 
 }
