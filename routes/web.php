@@ -23,9 +23,7 @@ use App\Models\User;
 
 Route::get('/', function () {
   return view('welcome');
-});
-
-Route::get('/livewire/business-profile', BusinessProfile::class)->name('business-profile');
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -45,3 +43,8 @@ Route::middleware([
 
     Route::get('/livewire/team-dashboard', TeamDashboard::class)->name('teamdash');
 });
+
+Route::get('{user_name}', BusinessProfile::class)->name('bizcard');
+
+Route::get('/livewire/business-profile', BusinessProfile::class)->name('business-profile');
+

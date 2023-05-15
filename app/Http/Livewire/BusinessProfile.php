@@ -12,17 +12,16 @@ class BusinessProfile extends Component
 { 
   public $params;
 
-  public function mount(){
-
-    $this->params = Request::query();
+  public function mount(Request $url){
     
+    $this->params = Request::route()->parameters['user_name'];
   }
 
 
   public function render(){ 
 
-    $user = User::find($this->params['user']);
+    $user = User::where('user_name',$this->params)->first();
 
-    return view('livewire.business-profile',['user'=>$user]);
+    return view('livewire.business-profile',['user'=>$user])->layout('layouts.guest');
   }
 }

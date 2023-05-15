@@ -25,7 +25,7 @@ class UserFactory extends Factory
     public function definition(): array
     {   
         $name = $this->faker->unique()->name();
-        $username = Str::slug($name,'');
+        $user_name = Str::slug($name,'');
         $github = 'https://www.github.com/'.Str::slug($name,'');
         $linkedin = 'https://www.linkedin.com/in/'.Str::slug($name,'');
         
@@ -41,9 +41,10 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
-            'user_name' => $username,
+            'user_name' => $user_name,
             'github_url' => $github,
             'linkedin_url' => $linkedin,
+            'my_history' => $this->faker->text(500)
         ];
     }
 

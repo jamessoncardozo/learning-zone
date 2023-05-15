@@ -132,6 +132,10 @@ class UserDashboard extends Component
           ->map(fn($user) => false); //*define todos os produtos selecionados como falso
   }
 
+  public function updatingSearch(){
+
+  }
+
   public function notifica($title, $message,$style)
   { 
 
