@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Request;
 
 class BusinessCard extends Component
 { 
-  public $user, $name, $github_url, $linkedin_url, $user_name;
+  public $id_user, $name, $github_url, $linkedin_url, $user_name;
   
   public $showModal = true;
 
@@ -20,6 +20,8 @@ class BusinessCard extends Component
   { 
     $user = User::find($id);
     
+    $this->id_user=$user->id;
+
     $this->name=$user->name;
     $this->github_url=$user->github_url;
     $this->linkedin_url=$user->linkedin_url;
@@ -40,6 +42,6 @@ class BusinessCard extends Component
       ->color(40,40,40)
       ->generate(env('APP_URL') . '/' . $this->user_name,'./img/qrcodes/'.$this->user_name.'.png');
 
-      return redirect()->route('bizcard',['user_name'=>$this->user_name]);
+      return redirect()->route('business-image',['id'=>$this->id_user]);
   }
 }

@@ -46,5 +46,4 @@ Route::middleware([
 
 Route::get('{user_name}', BusinessProfile::class)->name('bizcard');
 
-Route::get('/livewire/business-profile', BusinessProfile::class)->name('business-profile');
 
